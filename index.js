@@ -1,17 +1,18 @@
 const express = require('express');
 const path = require('path');
 
-// Initialize the Express application
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
-// Serve static files from the "public" directory
+// Middleware to serve static files (e.g., CSS, images, etc.)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Define a simple route for the homepage
+// Route to render the main page
 app.get('/', (req, res) => {
-  res.send('<h1>Welcome to My Sample Vercel Web App!</h1>');
+  res.sendFile(path.join(__dirname, 'views', 'index.html'));
 });
 
-// Export the app for Vercel
-module.exports = app;
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
